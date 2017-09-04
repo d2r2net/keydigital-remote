@@ -1,0 +1,5 @@
+.npm
+node_modules
+.ash_history
+.DS_store
+.node_repl_history
