@@ -1,7 +1,9 @@
 "use strict";
 const http =   require('http'),
     fs     =   require('fs'),
+    cmd    =   require('./config/cmd'),
     mosca  =   require('mosca'),
+    mime   =   require('mime'),
     mqttServ  = new mosca.Server({}),
     finalhandler = require('finalhandler'),
     Router    = require('router'),
@@ -13,9 +15,11 @@ fs.readdir('./public/assets', (err,folders) => {
     fs.readdir('./public/assets/' + folder, (err,files) => {
       files.forEach(file => {
         router.get('/a/' + folder + '/' + file,(req,res) => {
-          res.writeHead(200,{'Content-Type':'text/javascript'});
-          const assetUrl = fs.readFileSync('./public/assets/' + folder + '/' + file);
-          res.write(assetUrl);
+          const assetPath = './public/assets/' + folder + '/' + file ;
+          const assetFile = fs.readFileSync('./public/assets/' + folder + '/' + file);
+          const assetMime = mime.lookup(assetPath);
+          res.writeHead(200,{'Content-Type':assetMime});
+          res.write(assetFile);
           res.end();
         });
       });
@@ -45,3 +49,4 @@ mqttServ.on('clientConnected', (client) => {
 });
 
 httpServ.listen(3000);
+console.log(cmd.inputs);

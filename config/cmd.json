@@ -1,0 +1,86 @@
+{
+   "outputs":{
+      "out1":{
+         "name":"Salon",
+         "cmd":"SPO01",
+         "active":"true"
+      },
+      "out2":{
+         "name":"Chambre",
+         "cmd":"SPO02",
+         "active":"true"
+      },
+      "out3":{
+         "name":"Output 3",
+         "cmd":"",
+         "active":"false"
+      },
+      "out4":{
+         "name":"Output 4",
+         "cmd":"",
+         "active":"false"
+      },
+      "out5":{
+         "name":"Output 5",
+         "cmd":"",
+         "active":"false"
+      },
+      "out6":{
+         "name":"Output 6",
+         "cmd":"",
+         "active":"false"
+      },
+      "out7":{
+         "name":"Output 7",
+         "cmd":"",
+         "active":"false"
+      },
+      "out8":{
+         "name":"Output 8",
+         "cmd":"",
+         "active":"false"
+      }
+   },
+   "inputs":{
+      "in1":{
+         "name":"Illico 4k",
+         "cmd":"SI01",
+         "active":"true"
+      },
+      "in2":{
+         "name":"Illico",
+         "cmd":"SI02",
+         "active":"true"
+      },
+      "in3":{
+         "name":"Apple TV",
+         "cmd":"SI03",
+         "active":"true"
+      },
+      "in4":{
+         "name":"Caméras",
+         "cmd":"SI04",
+         "active":"true"
+      },
+      "in5":{
+         "name":"Input 5",
+         "cmd":"",
+         "active":"false"
+      },
+      "in6":{
+         "name":"Input 6",
+         "cmd":"",
+         "active":"false"
+      },
+      "in7":{
+         "name":"Input 7",
+         "cmd":"",
+         "active":"false"
+      },
+      "in8":{
+         "name":"Input 8",
+         "cmd":"",
+         "active":"false"
+      }
+   }
+}
