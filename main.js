@@ -6,8 +6,16 @@ const express = require('express'),
   mosca = require('mosca'),
   mqttServ = new mosca.Server({}),
   nunjucks = require('nunjucks');
+
+//nunjucks config
+  nunjucks.configure('views', {
+  autoescape: true,
+  noCache: true,
+  express   : app
+});
+
 //express config
-app.use('/a',express.static('./plublic/assets'));
+app.use('/a', express.static('public/assets'));
 //mqtt stuff
 mqttServ.attachHttpServer(server);
 
@@ -18,6 +26,6 @@ mqttServ.on('clientConnected', (client) => {
 
 app.get('/',(req,res) => {
   console.log('tadam!');
-  res.send('Hello World!');
+  res.render('index.njk');
 });
 server.listen(3000);
