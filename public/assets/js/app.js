@@ -9,4 +9,4 @@
     //client.end();
     $('p.mqttmsg').text(pp);
   });
-  client.publish("mqtt/demo", "hello world!");
+  client.publish("mqtt/demo", "Bonjour");

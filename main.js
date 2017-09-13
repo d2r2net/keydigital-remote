@@ -8,14 +8,15 @@ const express = require('express'),
   nunjucks = require('nunjucks');
 
 //nunjucks config
-  nunjucks.configure('views', {
-  autoescape: true,
-  noCache: true,
-  express   : app
+nunjucks.configure('views', {
+    autoescape: true,
+    cache: false,
+    express: app
 });
 
 //express config
 app.use('/a', express.static('public/assets'));
+
 //mqtt stuff
 mqttServ.attachHttpServer(server);
 
@@ -26,6 +27,9 @@ mqttServ.on('clientConnected', (client) => {
 
 app.get('/',(req,res) => {
   console.log('tadam!');
-  res.render('index.njk');
+  var data = {bonjour:'allo',serveur:cmd.serveur.url};
+  res.render('index.html',data);
+  console.log(data.serveur);
+
 });
 server.listen(3000);
