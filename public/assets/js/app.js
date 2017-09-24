@@ -10,3 +10,5 @@
     $('p.mqttmsg').text(pp);
   });
   client.publish("mqtt/demo", "Bonjour");
+
+  

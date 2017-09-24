@@ -24,10 +24,12 @@ mqttServ.on('clientConnected', (client) => {
   console.log('client connected', client.id);
 });
 
-
+// web server
 app.get('/',(req,res) => {
   console.log('tadam!');
-  var data = {bonjour:'allo',serveur:cmd.serveur.url};
+  var data = {bonjour:'allo',
+  serveur:cmd.serveur.url};
+  
   res.render('index.html',data);
   console.log(data.serveur);
 
