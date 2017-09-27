@@ -28,8 +28,10 @@ mqttServ.on('clientConnected', (client) => {
 app.get('/',(req,res) => {
   console.log('tadam!');
   var data = {bonjour:'allo',
-  serveur:cmd.serveur.url};
-  
+  serveur:cmd.serveur.url,
+  inputs:cmd.inputs};
+
+
   res.render('index.html',data);
   console.log(data.serveur);
 
