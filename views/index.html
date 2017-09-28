@@ -47,7 +47,7 @@
       <p style="text-align: center;">
       {% for key,input in inputs %}
       {% if(input.active === true) %}
-      <ons-button id="out2:{{key}}" modifier="Large--cta icon="{{input.icon}}" label="out2">
+      <ons-button id="out2:{{key}}" modifier="Large--cta" icon="{{input.icon}}">
        {{input.name}}
       </ons-button>
       <br>
@@ -57,7 +57,6 @@
     </ons-page>
   </template>
 
-<p class='mqttmsg'></p>
   </body>
 
 </html>
