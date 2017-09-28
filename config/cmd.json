@@ -3,41 +3,49 @@
     "out1": {
       "name": "Salon",
       "cmd": "SPO01",
+      "icon":"fa-television",
       "active": true
     },
     "out2": {
       "name": "Chambre",
       "cmd": "SPO02",
+      "icon":"md-hotel",
       "active": true
     },
     "out3": {
       "name": "Output 3",
       "cmd": "",
+      "icon":"md-movie",
       "active": false
     },
     "out4": {
       "name": "Output 4",
       "cmd": "",
+      "icon":"md-movie",
       "active": false
     },
     "out5": {
       "name": "Output 5",
       "cmd": "",
+      "icon":"md-movie",
       "active": false
     },
     "out6": {
       "name": "Output 6",
       "cmd": "",
+      "icon":"md-movie",
       "active": false
     },
     "out7": {
       "name": "Output 7",
       "cmd": "",
+      "icon":"md-movie",
       "active": false
     },
     "out8": {
       "name": "Output 8",
       "cmd": "",
+      "icon":"md-movie",
       "active": false
     }
   },
@@ -45,41 +53,49 @@
     "in1": {
       "name": "Illico 4k",
       "cmd": "SI01",
+      "icon":"md-movie",
       "active": true
     },
     "in2": {
       "name": "Illico",
       "cmd": "SI02",
+      "icon":"md-movie",
       "active": true
     },
     "in3": {
       "name": "Apple TV",
       "cmd": "SI03",
+      "icon":"fa-apple",
       "active": true
     },
     "in4": {
       "name": "Caméras",
       "cmd": "SI04",
+      "icon":"md-movie",
       "active": true
     },
     "in5": {
       "name": "Input 5",
       "cmd": "",
+      "icon":"md-movie",
       "active": false
     },
     "in6": {
       "name": "Input 6",
       "cmd": "",
+      "icon":"md-movie",
       "active": false
     },
     "in7": {
       "name": "Input 7",
       "cmd": "",
+      "icon":"md-movie",
       "active": false
     },
     "in8": {
       "name": false,
       "cmd": "",
+      "icon":"md-movie",
       "active": "false"
     }
   },

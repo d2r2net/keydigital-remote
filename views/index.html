@@ -9,25 +9,43 @@
   </head>
   <body>
 
-    <ons-page>
-    <ons-toolbar>
-      <div id="title" class="center">Tab 1</div>
-    </ons-toolbar>
-
     <ons-tabbar position="auto">
-      <ons-tab page="tab1.html" label="Tab 1" icon="ion-home, material:md-home" badge="7" active>
+      {% for key, output in outputs %}
+      {% if (output.active === true) %}
+      {# <ons-tab page="tab1.html" label="Tab 1" icon="ion-home, material:md-home" badge="7" active>
+      </ons-tab> #}
+      <ons-tab page="{{key}}.html" label="{{output.name}}" icon="{{output.icon}}">
       </ons-tab>
-      <ons-tab page="tab2.html" label="Tab 2" icon="md-hotel">
-      </ons-tab>
+      {%endif%}
+      {%endfor%}
     </ons-tabbar>
-  </ons-page>
 
-  <template id="tab1.html">
-    <ons-page id="Tab1">
+  <template id="out1.html">
+    <ons-page id="page-out1">
+      <ons-toolbar>
+        <div id="title" class="center">Salon</div>
+      </ons-toolbar>
       <p style="text-align: center;">
       {% for key,input in inputs %}
       {% if(input.active === true) %}
-      <ons-button id="{{key}}" modifier="Large--cta">
+      <ons-button id="{{key}}" modifier="Large--cta" icon="{{input.icon}}">
+       {{input.name}}
+      </ons-button>
+      <br>
+      {% endif %}
+      {%endfor%}
+      </p>
+    </ons-page>
+  </template>
+  <template id="out2.html">
+    <ons-page id="page-out2">
+      <ons-toolbar>
+        <div id="title" class="center">Chambre</div>
+      </ons-toolbar>
+      <p style="text-align: center;">
+      {% for key,input in inputs %}
+      {% if(input.active === true) %}
+      <ons-button id="{{key}}" modifier="Large--cta icon="{{input.icon}}">
        {{input.name}}
       </ons-button>
       <br>
@@ -37,13 +55,6 @@
     </ons-page>
   </template>
 
-  <template id="tab2.html">
-    <ons-page id="Tab2">
-      <p style="text-align: center;">
-        This is the second page.
-      </p>
-    </ons-page>
-  </template>
 <p class='mqttmsg'></p>
   </body>
 
