@@ -28,7 +28,7 @@
       <p style="text-align: center;">
       {% for key,input in inputs %}
       {% if(input.active === true) %}
-      <ons-button id="{{key}}" modifier="Large--cta" icon="{{input.icon}}">
+      <ons-button id="out1:{{key}}" modifier="Large--cta" icon="{{input.icon}}">
        {{input.name}}
       </ons-button>
       <br>
@@ -38,7 +38,7 @@
     </ons-page>
   </template>
 
-  
+
   <template id="out2.html">
     <ons-page id="out2">
       <ons-toolbar>
@@ -47,7 +47,7 @@
       <p style="text-align: center;">
       {% for key,input in inputs %}
       {% if(input.active === true) %}
-      <ons-button id="{{key}}" modifier="Large--cta icon="{{input.icon}}">
+      <ons-button id="out2:{{key}}" modifier="Large--cta icon="{{input.icon}}" label="out2">
        {{input.name}}
       </ons-button>
       <br>
