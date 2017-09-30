@@ -36,41 +36,35 @@ app.get('/',(req,res) => {
   inputs:inputs,
   outputs:outputs};
 
-
   res.render('index.html',data);
   console.log(data.serveur);
 
 });
 server.listen(3000);
+mqttClient();
 
-//mqtt client stuff
-var client  = mqtt.connect('ws://127.0.0.1:3000')
+function mqttClient() {
+  var client  = mqtt.connect('ws://127.0.0.1:3000');
+   const topics = [];
 
-client.on('connect', function () {
-  client.subscribe('outputs/out1');
-  client.subscribe('outputs/out2');
+  Object.keys(cmd.outputs).forEach((key) => {
+      var out = outputs[key];
 
 
-});
+      if (out.active === true){
 
-client.on('message', function (topic, message) {
-  // message is Buffer
-  console.log(topic.toString() + ' ' + message.toString());
-  
-});
-// const client = mqtt.connect('mqtt://127.0.0.1:3000');
-//
-// client.on('connect',() => {
-//   Object.keys(cmd.outputs).forEach((key) => {
-//     var out = outputs[key];
-//     console.log('la key: ' + key);
-//     if (out.active === true){
-//       client.subscribe('outputs/' + out);
-//     }
-//   });
-// });
-//
-//   client.on('message',(topic,payload) => {
-//         console.log(topic.toString + " " + payload.toString);
-//         client.end();
-//   });
+      const outTopic = 'outputs/' + key;
+      topics.push(outTopic);
+      }
+    });
+
+  client.on('connect', function () {
+    client.subscribe(topics);
+  });
+
+  client.on('message', function (topic, message) {
+    // message is Buffer
+    console.log(topic.toString() + ' ' + message.toString());
+
+  });
+}
