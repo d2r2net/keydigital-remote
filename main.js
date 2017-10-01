@@ -3,10 +3,12 @@ const express = require('express'),
   app = express(),
   server = require('http').createServer(app),
   cmd = require('./config/cmd'),
+  compression = require('compression'),
   mqtt = require('mqtt'),
   mosca = require('mosca'),
   mqttServ = new mosca.Server({}),
   nunjucks = require('nunjucks'),
+  minifyHTML = require('express-minify-html'),
   SerialPort = require('serialport'),
   outputs = cmd.outputs,
   inputs = cmd.inputs;
@@ -18,8 +20,22 @@ nunjucks.configure('views', {
     express: app
 });
 
+app.use(minifyHTML({
+    override:      true,
+    exception_url: false,
+    htmlMinifier: {
+        removeComments:            true,
+        collapseWhitespace:        true,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes:     true,
+        removeEmptyAttributes:     true,
+        minifyJS:                  true
+    }
+}));
+
 //express config
 app.use('/a', express.static('public/assets'));
+app.use(compression());
 
 //mqtt server  stuff
 mqttServ.attachHttpServer(server);
@@ -30,8 +46,7 @@ mqttServ.on('clientConnected', (client) => {
 
 // web server
 app.get('/',(req,res) => {
-  console.log('tadam!');
-  var data = {bonjour:'allo',
+  var data = {
   serveur:cmd.serveur.url,
   inputs:inputs,
   outputs:outputs};
@@ -40,7 +55,7 @@ app.get('/',(req,res) => {
   console.log(data.serveur);
 
 });
-server.listen(3000);
+module.exports = server.listen(3000);
 mqttClient();
 
 function mqttClient() {
