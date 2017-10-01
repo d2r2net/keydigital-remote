@@ -9,9 +9,9 @@ const express = require('express'),
   mqttServ = new mosca.Server({}),
   nunjucks = require('nunjucks'),
   minifyHTML = require('express-minify-html'),
-  SerialPort = require('serialport'),
-  outputs = cmd.outputs,
-  inputs = cmd.inputs;
+  SerialPort = require('serialport');
+
+
 
 //nunjucks config
 nunjucks.configure('views', {
@@ -48,22 +48,22 @@ mqttServ.on('clientConnected', (client) => {
 app.get('/',(req,res) => {
   var data = {
   serveur:cmd.serveur.url,
-  inputs:inputs,
-  outputs:outputs};
+  inputs:cmd.inputs,
+  outputs:cmd.outputs};
 
   res.render('index.html',data);
   console.log(data.serveur);
 
 });
-module.exports = server.listen(3000);
+server.listen(cmd.serveur.port);
 mqttClient();
 
 function mqttClient() {
-  var client  = mqtt.connect('ws://127.0.0.1:3000');
+  var client  = mqtt.connect('ws://' + cmd.serveur.url + ':' + cmd.serveur.port);
    const topics = [];
 
   Object.keys(cmd.outputs).forEach((key) => {
-      var out = outputs[key];
+      var out = cmd.outputs[key];
 
 
       if (out.active === true){
