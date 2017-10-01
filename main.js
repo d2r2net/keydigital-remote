@@ -89,16 +89,24 @@ function mqttClient() {
 }
 
 function serialCmd(topic,message) {
+  //serial port
+  const port = new SerialPort(cmd.serial.port);
   //output
   const oKey = topic.toString().substring(topic.indexOf('/') +1);
   //command to be send
   const command = cmd.outputs[oKey].cmd + cmd.inputs[message].cmd;
   //write carcter by caracter to serial
   for(var i=0; i < command.length; i++){
-        myPort.write(new Buffer(data[i], 'ascii'), function(err, results) {
+        port.write(new Buffer(command[i], 'ascii'),(err, results) => {
             // console.log('Error: ' + err);
-            // console.log('Results ' + results);
+             console.log('Results ' + results);
         });
     }
+    // Sending the terminate character
+    port.write(new Buffer('\n', 'ascii'),(err, results) => {
+        // console.log('err ' + err);
+        // console.log('results ' + results);
+        console.log(results);
+    });
 
-}
+}//serialCmd
