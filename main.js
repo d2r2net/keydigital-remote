@@ -50,36 +50,55 @@ app.get('/',(req,res) => {
   serveur:cmd.serveur.url,
   inputs:cmd.inputs,
   outputs:cmd.outputs};
-
+// render nunjucks view
   res.render('index.html',data);
   console.log(data.serveur);
 
 });
+// start express server
 server.listen(cmd.serveur.port);
 mqttClient();
-
+// mqtt client stuff
 function mqttClient() {
+  //client connection to mqtt server
   var client  = mqtt.connect('ws://' + cmd.serveur.url + ':' + cmd.serveur.port);
+  //mqtt topic array
    const topics = [];
-
+ // find active output
   Object.keys(cmd.outputs).forEach((key) => {
       var out = cmd.outputs[key];
-
-
-      if (out.active === true){
-
+      //create active out mqtt topic array
+     if (out.active === true){
+       //create mqtt topic
       const outTopic = 'outputs/' + key;
       topics.push(outTopic);
       }
-    });
+    });// /Object.keys
 
   client.on('connect', function () {
+    // subscribe on active ouput mqtt channels
     client.subscribe(topics);
   });
-
+//trigger when a mqtt message is reseived
   client.on('message', function (topic, message) {
-    // message is Buffer
+    // message is Buffer .
     console.log(topic.toString() + ' ' + message.toString());
-
+    //write data to serial port
+    serialCmd(topic,message);
   });
+}
+
+function serialCmd(topic,message) {
+  //output
+  const oKey = topic.toString().substring(topic.indexOf('/') +1);
+  //command to be send
+  const command = cmd.outputs[oKey].cmd + cmd.inputs[message].cmd;
+  //write carcter by caracter to serial
+  for(var i=0; i < command.length; i++){
+        myPort.write(new Buffer(data[i], 'ascii'), function(err, results) {
+            // console.log('Error: ' + err);
+            // console.log('Results ' + results);
+        });
+    }
+
 }

@@ -22,11 +22,13 @@ var client = mqtt.connect();
 
   });
 function validateClicked(clicked) {
+  // clicked out
   let clickedOut = clicked.substring(0, clicked.indexOf(':'));
+  //clicked in
   let clickedIn = clicked.substring(clicked.indexOf(':') +1);
-  console.log(clickedOut);
-  console.log(clickedIn);
+  //if validation passed publish to mqtt channel
   if (clickedOut.match(/^out([0-9]+)$/) && clickedIn.match(/^in([0-9]+)$/)){
+    //publish to output topic and send input to topic
     client.publish("outputs/" + clickedOut,clickedIn);
   }
 }
