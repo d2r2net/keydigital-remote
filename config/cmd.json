@@ -1,114 +1,149 @@
 {
-  "outputs": {
-    "out1": {
-      "name": "Salon",
-      "cmd": "SPO01",
-      "icon":"fa-television",
-      "active": true
-    },
-    "out2": {
-      "name": "Chambre",
-      "cmd": "SPO02",
-      "icon":"md-hotel",
-      "active": true
-    },
-    "out3": {
-      "name": "Output 3",
-      "cmd": "",
-      "icon":"md-movie",
-      "active": false
-    },
-    "out4": {
-      "name": "Output 4",
-      "cmd": "",
-      "icon":"md-movie",
-      "active": false
-    },
-    "out5": {
-      "name": "Output 5",
-      "cmd": "",
-      "icon":"md-movie",
-      "active": false
-    },
-    "out6": {
-      "name": "Output 6",
-      "cmd": "",
-      "icon":"md-movie",
-      "active": false
-    },
-    "out7": {
-      "name": "Output 7",
-      "cmd": "",
-      "icon":"md-movie",
-      "active": false
-    },
-    "out8": {
-      "name": "Output 8",
-      "cmd": "",
-      "icon":"md-movie",
-      "active": false
-    }
-  },
-  "inputs": {
-    "in1": {
-      "name": "Illico 4k",
-      "cmd": "SI01",
-      "icon":"md-movie",
-      "active": true
-    },
-    "in2": {
-      "name": "Illico",
-      "cmd": "SI02",
-      "icon":"md-movie",
-      "active": true
-    },
-    "in3": {
-      "name": "Apple TV",
-      "cmd": "SI03",
-      "icon":"fa-apple",
-      "active": true
-    },
-    "in4": {
-      "name": "Caméras",
-      "cmd": "SI04",
-      "icon":"md-movie",
-      "active": true
-    },
-    "in5": {
-      "name": "Input 5",
-      "cmd": "",
-      "icon":"md-movie",
-      "active": false
-    },
-    "in6": {
-      "name": "Input 6",
-      "cmd": "",
-      "icon":"md-movie",
-      "active": false
-    },
-    "in7": {
-      "name": "Input 7",
-      "cmd": "",
-      "icon":"md-movie",
-      "active": false
-    },
-    "in8": {
-      "name": false,
-      "cmd": "",
-      "icon":"md-movie",
-      "active": "false"
-    }
-  },
-  "serveur":{
-    "url":"127.0.0.1:3000",
-    "port":3000
-  },
-  "rs-232":{
-    "baud_rate":57600,
-    "data_bits":8,
-    "stop_bits":1,
-    "parity":"none",
-    "flow_control":"none"
-
-  }
+   "outputs":{
+      "out1":{
+         "name":"Salon",
+         "cmd":"SPO01",
+         "icon":"fa-television",
+         "active":true
+      },
+      "out2":{
+         "name":"Chambre",
+         "cmd":"SPO02",
+         "icon":"md-hotel",
+         "active":true
+      },
+      "out3":{
+         "name":"Output 3",
+         "cmd":"",
+         "icon":"md-movie",
+         "active":false
+      },
+      "out4":{
+         "name":"Output 4",
+         "cmd":"",
+         "icon":"md-movie",
+         "active":false
+      },
+      "out5":{
+         "name":"Output 5",
+         "cmd":"",
+         "icon":"md-movie",
+         "active":false
+      },
+      "out6":{
+         "name":"Output 6",
+         "cmd":"",
+         "icon":"md-movie",
+         "active":false
+      },
+      "out7":{
+         "name":"Output 7",
+         "cmd":"",
+         "icon":"md-movie",
+         "active":false
+      },
+      "out8":{
+         "name":"Output 8",
+         "cmd":"",
+         "icon":"md-movie",
+         "active":false
+      },
+      "all":{
+         "name":"All Outputs",
+         "cmd":"A",
+         "icon":"",
+         "active":false
+      }
+   },
+   "inputs":{
+      "in1":{
+         "name":"Illico 4k",
+         "cmd":"SI01",
+         "icon":"md-movie",
+         "active":true
+      },
+      "in2":{
+         "name":"Illico",
+         "cmd":"SI02",
+         "icon":"md-movie",
+         "active":true
+      },
+      "in3":{
+         "name":"Apple TV",
+         "cmd":"SI03",
+         "icon":"fa-apple",
+         "active":true
+      },
+      "in4":{
+         "name":"Caméras",
+         "cmd":"SI04",
+         "icon":"md-movie",
+         "active":true
+      },
+      "in5":{
+         "name":"Input 5",
+         "cmd":"",
+         "icon":"md-movie",
+         "active":false
+      },
+      "in6":{
+         "name":"Input 6",
+         "cmd":"",
+         "icon":"md-movie",
+         "active":false
+      },
+      "in7":{
+         "name":"Input 7",
+         "cmd":"",
+         "icon":"md-movie",
+         "active":false
+      },
+      "in8":{
+         "name":false,
+         "cmd":"",
+         "icon":"md-movie",
+         "active":"false"
+      },
+      "up":{
+         "name":"Input up",
+         "cmd":"U",
+         "icon":"",
+         "active":false
+      },
+      "down":{
+         "name":"Input down",
+         "cmd":"D",
+         "icon":"",
+         "active":false
+      }
+   },
+   "serveur":{
+      "url":"127.0.0.1:3000",
+      "port":3000
+   },
+   "rs-232":{
+      "port":"",
+      "baud_rate":57600,
+      "data_bits":8,
+      "stop_bits":1,
+      "parity":"none",
+      "flow_control":"none"
+   },
+   "commands":{
+      "on":{
+         "Description":"Power ON",
+         "cmd":"PN",
+         "icon":""
+      },
+      "off":{
+         "Description":"Power OFF",
+         "cmd":"PF",
+         "icon":""
+      },
+      "status":{
+         "Description":"Get device status",
+         "cmd":"STA",
+         "icon":""
+      }
+   }
 }
