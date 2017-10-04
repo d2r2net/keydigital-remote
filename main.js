@@ -11,7 +11,11 @@ const express = require('express'),
   minifyHTML = require('express-minify-html'),
   SerialPort = require('serialport');
 
-
+  //serial port
+  const port = new SerialPort(cmd.serial.port,{
+  baudRate: 57600
+});
+port.write('SPO01SI04');
 
 //nunjucks config
 nunjucks.configure('views', {
@@ -39,7 +43,6 @@ app.use(compression());
 
 //mqtt server  stuff
 mqttServ.attachHttpServer(server);
-
 mqttServ.on('clientConnected', (client) => {
   console.log('client connected', client.id);
 });
@@ -89,24 +92,18 @@ function mqttClient() {
 }
 
 function serialCmd(topic,message) {
-  //serial port
-  const port = new SerialPort(cmd.serial.port);
+
   //output
   const oKey = topic.toString().substring(topic.indexOf('/') +1);
   //command to be send
-  const command = cmd.outputs[oKey].cmd + cmd.inputs[message].cmd;
-  //write carcter by caracter to serial
-  for(var i=0; i < command.length; i++){
-        port.write(new Buffer(command[i], 'ascii'),(err, results) => {
-            // console.log('Error: ' + err);
-             console.log('Results ' + results);
-        });
-    }
-    // Sending the terminate character
-    port.write(new Buffer('\n', 'ascii'),(err, results) => {
-        // console.log('err ' + err);
-        // console.log('results ' + results);
-        console.log(results);
-    });
+  const command = new Buffer (cmd.outputs[oKey].cmd + cmd.inputs[message].cmd + '\r\n',"ascii");
+  console.log(command);
+  port.write(command, function(err, results) {
+    if(err)
+    console.log('err ' + err);
+    console.log('results ' + results);
+
+});
+
 
 }//serialCmd

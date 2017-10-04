@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/didier1/KD-4x4CSK-remote.git"
+    "url": "git+https://github.com/d2r2net/keydigital-remote.git"
   },
   "keywords": [
     "Key",
@@ -33,7 +33,7 @@
   "author": "Didier Roy",
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/didier1/KD-4x4CSK-remote/issues"
+    "url": ""
   },
-  "homepage": "https://gitlab.com/didier1/KD-4x4CSK-remote#README"
+  "homepage": "https://github.com/d2r2net/keydigital-remote.git#README"
 }

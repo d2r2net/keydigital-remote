@@ -20,6 +20,9 @@
       {%endfor%}
     </ons-tabbar>
 
+
+
+
   <template id="out1.html">
     <ons-page id="out1">
       <ons-toolbar>
@@ -28,8 +31,9 @@
       <p style="text-align: center;">
       {% for key,input in inputs %}
       {% if(input.active === true) %}
-      <ons-button id="out1:{{key}}" modifier="Large--cta" icon="{{input.icon}}">
+      <ons-button id="out1:{{key}}" modifier="Large--cta">
        {{input.name}}
+
       </ons-button>
       <br>
       {% endif %}
