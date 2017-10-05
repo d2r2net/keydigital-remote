@@ -2,7 +2,7 @@
 const express = require('express'),
   app = express(),
   server = require('http').createServer(app),
-  cmd = require('./config/cmd'),
+  config = require('./config/config'),
   compression = require('compression'),
   mqtt = require('mqtt'),
   mosca = require('mosca'),
@@ -10,12 +10,10 @@ const express = require('express'),
   nunjucks = require('nunjucks'),
   minifyHTML = require('express-minify-html'),
   SerialPort = require('serialport');
-
   //serial port
-  const port = new SerialPort(cmd.serial.port,{
-  baudRate: 57600
-});
-port.write('SPO01SI04');
+  const port = new SerialPort(config.serial.port,{
+  baudRate: config.serial.baudRate
+  });
 
 //nunjucks config
 nunjucks.configure('views', {
@@ -50,26 +48,27 @@ mqttServ.on('clientConnected', (client) => {
 // web server
 app.get('/',(req,res) => {
   var data = {
-  serveur:cmd.serveur.url,
-  inputs:cmd.inputs,
-  outputs:cmd.outputs};
+  serveur:config.serveur.url,
+  port:config.serveur.port,
+  inputs:config.inputs,
+  outputs:config.outputs};
 // render nunjucks view
   res.render('index.html',data);
   console.log(data.serveur);
 
 });
 // start express server
-server.listen(cmd.serveur.port);
+server.listen(config.serveur.port);
 mqttClient();
 // mqtt client stuff
 function mqttClient() {
   //client connection to mqtt server
-  var client  = mqtt.connect('ws://' + cmd.serveur.url + ':' + cmd.serveur.port);
+  var client  = mqtt.connect('ws://' + config.serveur.url + ':' + config.serveur.port);
   //mqtt topic array
    const topics = [];
  // find active output
-  Object.keys(cmd.outputs).forEach((key) => {
-      var out = cmd.outputs[key];
+  Object.keys(config.outputs).forEach((key) => {
+      var out = config.outputs[key];
       //create active out mqtt topic array
      if (out.active === true){
        //create mqtt topic
@@ -87,16 +86,16 @@ function mqttClient() {
     // message is Buffer .
     console.log(topic.toString() + ' ' + message.toString());
     //write data to serial port
-    serialCmd(topic,message);
+    serialconfig(topic,message);
   });
 }
 
-function serialCmd(topic,message) {
+function serialconfig(topic,message) {
 
   //output
   const oKey = topic.toString().substring(topic.indexOf('/') +1);
   //command to be send
-  const command = new Buffer (cmd.outputs[oKey].cmd + cmd.inputs[message].cmd + '\r\n',"ascii");
+  const command = new Buffer (config.outputs[oKey].cmd + config.inputs[message].cmd + '\r\n',"ascii");
   console.log(command);
   port.write(command, function(err, results) {
     if(err)
@@ -106,4 +105,4 @@ function serialCmd(topic,message) {
 });
 
 
-}//serialCmd
+}//serialconfig
